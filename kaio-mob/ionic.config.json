@@ -1,0 +1,7 @@
+{
+  "name": "kaio-mob",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
