@@ -5,7 +5,7 @@ import { noLogin } from './core/guards/no-login.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate:[AuthGuard]
   },
