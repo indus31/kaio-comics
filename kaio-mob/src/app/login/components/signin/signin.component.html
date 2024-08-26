@@ -1,15 +1,22 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-input
-      formControlName="login"
-      placeholder="votre login ........stp"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input type="password" placeholder="Votre mot de passe..." formControlName="password">
-    <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-    </ion-input>
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input
+        formControlName="login"
+        placeholder="votre login ........stp"
+      ></ion-input>
     </ion-item>
-  <ion-button  id='login'type='submit'[disabled]="form.invalid">allons-y</ion-button>
-  
-</form>
+    <ion-item>
+      <ion-input
+        type="password"
+        placeholder="Votre mot de passe..."
+        formControlName="password"
+      >
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+    <ion-button id="login" type="submit" [disabled]="form.invalid"
+      >allons-y</ion-button
+    >
+  </form>
+</ion-content>
