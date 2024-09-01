@@ -11,7 +11,7 @@ export class Users {
   @Prop()
   gender: string;
   @Prop()
-  emails: string[];
+  emails: string;
   @Prop()
   telephone: string;
 }

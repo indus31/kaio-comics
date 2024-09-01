@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Users } from './model/users.schema';
 
-@Controller()
+@Controller('api/v1/users')
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @MessagePattern({ cmd: 'allUsers' })
+  async findAll(): Promise<Users[]> {
+    return await this.appService.findAll();
+  }
+  @MessagePattern({ cmd: 'oneUser' })
+  async findOne(@Payload() payload: any): Promise<Users> {
+    return await this.appService.findOne(payload);
+  }
+  @MessagePattern({ cmd: 'addUser' })
+  async addUser(user: Users): Promise<Users> {
+    const newUser = this.appService.add(user);
+    return newUser;
   }
 }
