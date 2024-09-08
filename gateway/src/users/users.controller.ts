@@ -6,7 +6,7 @@ import { Observable, take } from 'rxjs';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @Get() // get http://localhost:3000/intern
+  @Get() // get http://localhost:3000/users
   findAll(): Observable<Array<UserType>> {
     return this.usersService.findAll().pipe(take(1)); // take arrete d'observer après la reception d'un seul élément
   }
