@@ -55,7 +55,8 @@ export class SigninComponent implements OnInit {
         next: (response: HttpResponse<any>) => {
           if (response.status === 200) {
             this._storage.store('auth',response.body.token)
-            this._router.navigate([''])
+            console.log('just before navigate')
+            this._router.navigate(['home','posts'])
           } else {
             console.log(`ko, ${JSON.stringify(response.body)}`);
             this.loginToast('top',`${JSON.stringify(response.body)}`)

@@ -15,7 +15,7 @@ export class noLogin implements CanActivate{
       console.log('storage est vide')
       return true
     }
-    console.log('navigate to "" ')
+    console.log('navigate to "home" ')
     this._router.navigate([''])
     return false
   }
