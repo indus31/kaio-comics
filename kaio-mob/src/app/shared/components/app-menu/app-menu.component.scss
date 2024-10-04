@@ -1,0 +1,81 @@
+
+.menuButton{
+    position :absolute;
+    right: 2%;
+    top:2%;
+}
+.colorButton{
+    --color:white;
+}
+.menuSize{
+    background-color: #9bcaf2;
+    height:350%;
+    width:300%;
+}
+.primaryBg{
+    background-color: #9bcaf2;
+}
+.menu{
+    animation-duration: 0.5s;
+    animation-name: slidein;
+    border-radius:10px; ;
+    background-color: white;
+    z-index:100;
+    border:solid black 1px;
+    width:20%;
+    position:absolute;
+    right:0%;
+    top:40%;
+}
+.closeButton{
+    background-color: black;
+    position:absolute;
+    border:black 1px solid;
+    top:50%;
+    left:50%;
+}
+ion-item{
+    border-radius: 10px;
+}
+ion-item::part(native){
+    background: #9bcaf2;
+}
+.menuOverlay{
+    border-radius: 10px;
+}
+
+  
+  @keyframes slidein {
+    from {
+      right:-20%;
+      width: 20%;
+    }
+  
+    to {
+        right:0%;
+        width: 20%;
+    }
+  }
+@media screen and (max-width: 899px) {
+    .menu ion-label {
+        font-size: 70%;
+        
+    }
+    .menu{
+        animation-duration: 0.5s;
+        animation-name: slidein2;
+        width:40%;
+    }
+    @keyframes slidein2 {
+        from {
+          right:-20%;
+          width: 40%;
+        }
+      
+        to {
+            right:0%;
+            width: 40%;
+        }
+      }
+   
+  }

@@ -1,0 +1,31 @@
+<ion-buttons slot="start" class="menuButton" (click)="toggleMenu()">
+  <ion-menu-button auto-hide="false"></ion-menu-button>
+</ion-buttons>
+
+<div class="menu-overlay primaryBg" *ngIf="isMenuOpen" (click)="closeMenu()">
+  <ion-card class="menu menu-overlay-open primaryBg">
+    <button class="closeButton" (click)="closeMenu()"><ion-icon name="close-circle-outline"></ion-icon></button>
+    <ion-list class="primaryBg">
+      <ion-item class="primaryBg">
+        <ion-label class="primaryBg">A propos</ion-label>
+        <ion-button><ion-icon name="ear-outline"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>contact</ion-label>
+        <ion-button><ion-icon name="create-outline"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>paramètres</ion-label>
+        <ion-button><ion-icon name="construct-outline"></ion-icon></ion-button>
+        
+      </ion-item>
+      <ion-item (click)="presentAlert()">
+        <ion-label>déconnection</ion-label>
+        <ion-button (click)="presentAlert()"><ion-icon name="power-outline"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+      
+    </ion-card>  
+    
+  
+</div>
