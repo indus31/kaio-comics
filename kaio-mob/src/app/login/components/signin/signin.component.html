@@ -1,11 +1,14 @@
-<ion-content class="">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flexForm">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flexForm ">
+    <ion-label>nom d'utilisateur : </ion-label>
     <ion-item>
+      
       <ion-input
         formControlName="login"
         placeholder="votre login ........stp"
       ></ion-input>
     </ion-item>
+    <ion-label>mot de passe : </ion-label>
     <ion-item>
       <ion-input
         type="password"
@@ -19,4 +22,4 @@
       >allons-y</ion-button
     >
   </form>
-</ion-content>
+

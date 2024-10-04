@@ -1,14 +1,19 @@
-// ion-content{
-//     --background:#9BCDA2
-// }
+@font-face {
+    font-family: 'animeAce';
+    src: url('/assets/FONTS/anime_ace_bb/animeace2bb_tt/animeace2_reg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'badaboum';
+    src: url('/assets/FONTS/badaboom_bb/BADABB__.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .blueBackgr{
     --background:#9bcaf2
 }
-ion-content{
-    display:flex;
-   
-    
-}
+
 ion-toolbar{
     width:50%;
     display:flex ;
@@ -16,9 +21,36 @@ ion-toolbar{
     
 }
 .logo{
-    margin:auto;
-    width:20%;
-    height:50%;
-    justify-content: center;
-    
+    width:15%;
+    height:20%;
+    // position:absolute;
+    // top:5%;
+    // left:35%;
 }
+.divLogo{
+    width: 100%;
+    //border:black solid 1px;
+    display: flex;
+    justify-content: center;
+}
+.regularFont{
+    font-family: 'animeAce', sans-serif;
+}
+.bigFont{
+    font-family:'badaboum', sans-serif;
+}
+.secondaryColor{
+    color:#0388A6;
+}
+.title{
+    text-align: center;
+}
+@media only screen and (max-width: 800px) {
+    .logo{
+        width:30%;
+        height:10%;
+        // position:absolute;
+        // top:5%;
+        // left:35%;
+    }
+  }
