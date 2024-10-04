@@ -1,0 +1,46 @@
+.border{
+    border: solid 1px black;
+}
+.firstColor{
+    background-color:#9bcaf2 ;
+}
+
+#logo{
+    width:30%;
+    height:35%;
+}
+#content{
+   --background:#0388A6;
+}
+#searchBar{
+    --border-radius:10px;
+}
+.searchBar{
+    background-color:#0388A6;
+    --ion-item-background:#0388A6;
+    --ion-background-color:var(--background);
+    width:45%;
+    height:80%;
+    position:absolute;
+    top:2%;
+    left:35%;
+}
+@media (min-width: 850px) {
+    #logo{
+        width:15%;
+        height:15%;
+    }
+    #searchBar{
+        --border-radius:10px;
+    }
+    .searchBar{
+        --ion-item-background:var(--background);
+        --ion-background-color:var(--background);
+        --border-radius:10px;
+        width:55%;
+        height:75%;
+        position:absolute;
+        top:2%;
+        left:25%;
+    }
+}
