@@ -5,6 +5,10 @@ export class Users {
   @Prop()
   id?: number;
   @Prop()
+  password:string;
+  @Prop()
+  username:string;
+  @Prop()
   lastname: string;
   @Prop()
   firstname: string;
@@ -13,6 +17,10 @@ export class Users {
   @Prop()
   emails: string;
   @Prop()
-  telephone: string;
+  subscription?: string[]
+  @Prop()
+  profilePicture?: string;
+  @Prop()
+  frontPicture?:string;
 }
 export const usersSchema = SchemaFactory.createForClass(Users);

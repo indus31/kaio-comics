@@ -1,8 +1,12 @@
 export type UserType = {
-  id?: number;
-  lastname: string;
-  firstname: string;
-  gender: string;
-  emails: string;
-  telephone: string;
+  id?:number
+  password:string
+  username?:string
+  lastname: string
+  firstname:string
+  gender:string
+  emails:string
+  subscription?:string[]
+  profilePicture?:string
+  frontPicture?: string
 };
