@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class=" flex-form">
+  <div class="form-container ">
+    <ion-label>nom d'utilisateur : </ion-label>
+    <input formControlName="username" placeholder="">
+  </div>
+  <div class="form-container ">
+    <ion-label>nom de famille : </ion-label>
+    <input formControlName="lastname" placeholder="">
+  </div>
+  <div class="form-container ">
+    <ion-label>prénom : </ion-label>
+    <input formControlName="firstname" placeholder="">
+  </div>
+  <div class="form-container ">
+    <ion-label>genre : </ion-label>
+    <input formControlName="gender" placeholder="">
+  </div>
+  <div class="form-container ">
+    <ion-label>email : </ion-label>
+    <input formControlName="email" placeholder="">
+  </div>
+  <div class="form-container">
+    <ion-label>mot de passe : </ion-label>
+    <ion-item class="">
+      <ion-input type="password" placeholder="Votre mot de passe..." formControlName="password">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+  </div>
+  <div class="form-container ">
+    <ion-label>confirmer mot de passe : </ion-label>
+    <ion-item>
+      <ion-input shape="round" type="password" placeholder="Confirmer mdp" formControlName="checkPassword">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+  </div>
+  <div class="form-container ">
+    <ion-checkbox class="checkBox" formControlName="checkCGU" labelPlacement="start">accepte les conditions
+      d'utilisations</ion-checkbox>
+  </div>
+  <div class="form-container">
+    <ion-button class="buttonColor buttonPos marge" id="login" type="submit" [disabled]="form.invalid">allons-y</ion-button>
+  </div>
+</form>  
+  
