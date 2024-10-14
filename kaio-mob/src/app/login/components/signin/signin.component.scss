@@ -15,7 +15,7 @@ ion-content{
 }
 .flexForm{
     margin-top:5%;
- flex-direction: column; 
+    flex-direction: column; 
     display:flex;
     align-items:center;
     justify-content:center;
@@ -31,4 +31,10 @@ ion-label{
 }
 .border{
     border:solid black 1px;
+}
+.buttonColor{
+    --background: #0388A6;
+    --color:#F2C3A7;
+    font-family: 'badaboum';
+
 }
