@@ -69,3 +69,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#
+/android
+
+users_front_picture
+users_profile_picture
+
