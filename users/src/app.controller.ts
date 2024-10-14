@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { Users } from './model/users.schema';
@@ -13,6 +13,11 @@ export class AppController {
   @MessagePattern({ cmd: 'oneUser' })
   async findOne(@Payload() payload: any): Promise<Users> {
     return await this.appService.findOne(payload);
+  }
+  @MessagePattern({ cmd: 'findByUsername' })
+  async findByUsername(@Payload() payload: any): Promise<Users> {
+    await Logger.log('dans le controller de users : '+JSON.stringify(this.appService.findByUsername(payload)))
+    return await this.appService.findByUsername(payload);
   }
   @MessagePattern({ cmd: 'addUser' })
   async addUser(user: Users): Promise<Users> {
