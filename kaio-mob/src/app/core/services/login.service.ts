@@ -1,30 +1,44 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+import { UsersService } from './users/users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor() { }
-  doLogin(credentials:any):Observable<HttpResponse<any>>{
-    if(credentials.login === 'admin' && credentials.password ==='admin'){
-      //retourner un status 200
-      return of(
-        new HttpResponse <any>({
-          status:200,
-          body:{token:'a.b.c'}
-        })
-      )
+  constructor(private userService:UsersService) { }
+  doLogin(credentials: any): Observable<HttpResponse<any>> {
+    if (credentials.login === 'admin' && credentials.password === 'admin') {
+      return of(new HttpResponse<any>({
+        status: 200,
+        body: { token: 'a.b.c' }
+      }));
     }
-    //Retourner une réponse 403 forbiden
-    return of(
-      new HttpResponse<any>({
-        status:403,
-        body:{message:'failure'}
+    return this.userService.findOneByUserName(credentials.login).pipe(
+      map(user => {
+        console.log(JSON.stringify(user))
+        console.log('mot de passe retourner par la req  :'+user.password + 'password entré : '+credentials.password)
+        if ( user.password === credentials.password) {
+          return new HttpResponse<any>({
+            status: 200,
+            body: { token: 'a.b.c' }
+          });
+        } else {
+          return new HttpResponse<any>({
+            status: 403,
+            body: { message: 'failure 403' }
+          });
+        }
+      }),
+      catchError(error => {
+        return of(new HttpResponse<any>({
+          status: 404,
+          body: { message: 'failure 404' }
+        }));
       })
-    )
+    );
   }
   
 }
