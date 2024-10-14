@@ -17,4 +17,12 @@ export class UsersService {
     return this._client.get<Array<UserType>>(this.URI)
     .pipe(map(data => plainToInstance(User,data)))
   }
+  public findOneByUserName(data:string):Observable<UserType>{
+    return this._client.get<UserType>(this.URI+'/username/'+ data).pipe(map(data=> plainToInstance(User,data)));
+  }
+
+  addUser(user:UserType):Observable<UserType>{
+    return this._client.post<UserType>(this.URI,user);
+  }
+  
 }
