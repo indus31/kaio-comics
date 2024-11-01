@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'animeAce';
+    src: url('/assets/FONTS/anime_ace_bb/animeace2bb_tt/animeace2_reg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'badaboum';
+    src: url('/assets/FONTS/badaboom_bb/BADABB__.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+#container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.absoluteContainer{
+    position:absolute;
+    z-index: 1;
+    top:3%;
+    left:5%;
+}
+ion-avatar{
+    margin-bottom: 5%;
+    width:60%;
+    height:100px;
+}
+#userNameContainer{
+    background-color: #0388A6;
+    border:#9BCAF2 solid 1px;
+    border-radius:10px;
+}
+#userName{
+    margin-bottom: 15%;
+    font-family:'badaboum';
+}
+

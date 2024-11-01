@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'badaboum';
+    src: url('/assets/FONTS/badaboom_bb/BADABB__.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.container{
+    border:black solid 1px;
+    position:absolute;
+    top:50%;
+    right:3%;
+    background:#0388A6;
+    border-radius:10px;
+   
+}
+ion-item{
+    --background:#0388A6; 
+    --color:#F2C3A7;
+    
+}
+ion-list{
+    background-color: #0388A6;
+    border-radius:10px;
+}
+ion-label{
+    font-family: 'badaboum'; 
+}
+span{
+    font-family: 'badaboum'; 
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    /* Your CSS rules here */
+    span{
+        display:none;
+    }
+  }
+// .contentContainer{
+//     border:black solid 1px;
+//     display:flex;
+// }
