@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Users } from './model/users.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -22,9 +22,23 @@ export class AppService {
     Logger.log('dans le service de users : '+ JSON.stringify(userData))
     return userData;
   }
+  async getUsers(id:any): Promise<Users>{
+    const existingIntern = await this.usersModel.findById(id).exec();
+    if (!existingIntern) {
+      throw new NotFoundException(`Intern #${id} not found`);
+    }
+    return existingIntern;
+  }
   async add(createUser: Users): Promise<Users> {
     const newUser = await new this.usersModel(createUser);
     return newUser.save();
+  }
+  async update(id:any,updateUser):Promise<Users>{
+    const existingUser = await this.usersModel.findByIdAndUpdate(id, updateUser, { new: true });
+    if (!existingUser) {
+        throw new NotFoundException(`User #${id} not found`);
+    }
+    return existingUser;
   }
 
 }

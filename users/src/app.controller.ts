@@ -24,4 +24,13 @@ export class AppController {
     const newUser = this.appService.add(user);
     return newUser;
   }
+  @MessagePattern({ cmd:'findById'})
+  async findOneById(@Payload() payload:any): Promise<Users>{
+    return await this.appService.getUsers(payload)
+  }
+  @MessagePattern({ cmd: 'updateUser' })
+  async updateUser(@Payload() payload: any): Promise<Users> {
+    const { id, updateUser } = payload;
+    return await this.appService.update(id, updateUser);
+  }
 }
