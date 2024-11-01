@@ -4,7 +4,7 @@ import { Expose } from "class-transformer";
 export class User{
    
     @Expose()
-    id:number;
+    _id:string;
     @Expose()
     password:string;
     @Expose()
@@ -22,7 +22,7 @@ export class User{
     @Expose()
     frontPicture:string;
      constructor(
-        id:number,
+        _id:string,
         password:string,
         lastname:string,
         firstname:string,
@@ -31,7 +31,7 @@ export class User{
         profilePicture:string,
         frontPicture:string
     ){
-        this.id = id;
+        this._id = _id;
         this.password = password;
         this.lastname = lastname;
         this.firstname = firstname;

@@ -2,13 +2,14 @@ import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { UsersService } from './users/users.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private userService:UsersService) { }
+  constructor(private userService:UsersService,private storageService:StorageService) { }
   doLogin(credentials: any): Observable<HttpResponse<any>> {
     if (credentials.login === 'admin' && credentials.password === 'admin') {
       return of(new HttpResponse<any>({
@@ -18,7 +19,12 @@ export class LoginService {
     }
     return this.userService.findOneByUserName(credentials.login).pipe(
       map(user => {
-        console.log(JSON.stringify(user))
+        const dataJson = JSON.stringify(user)
+        const id = JSON.stringify(user._id)
+        console.log(id)
+        console.log(dataJson)
+        this.storageService.store('session',[user._id,user.username])
+        console.log("recupération de l'id par le stockage : "+ this.storageService.retrieve('session'))
         console.log('mot de passe retourner par la req  :'+user.password + 'password entré : '+credentials.password)
         if ( user.password === credentials.password) {
           return new HttpResponse<any>({

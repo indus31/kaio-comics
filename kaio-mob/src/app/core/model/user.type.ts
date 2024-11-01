@@ -1,7 +1,7 @@
 
 
 export type UserType = {
-    id?:number
+    _id?:string
     password:string
     username?:string
     lastname: string

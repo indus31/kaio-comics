@@ -24,5 +24,14 @@ export class UsersService {
   addUser(user:UserType):Observable<UserType>{
     return this._client.post<UserType>(this.URI,user);
   }
+  public findOneBy(data:string):Observable<UserType>{
+    console.log("id retiré depuis storage : "+ data)
+    const user =  this._client.get<UserType>(this.URI+'/'+data).pipe(map(data=> plainToInstance(User,data)))
+    console.log(JSON.stringify(user))
+    return user
+  }
+  updateUser(user: UserType): Observable<UserType> {
+    return this._client.put<UserType>(`${this.URI}/${user._id}`, user);
+  }
   
 }
