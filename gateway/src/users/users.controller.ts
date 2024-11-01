@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserType } from './model/user.type';
 import { Observable, take } from 'rxjs';
@@ -19,9 +19,16 @@ export class UsersController {
     Logger.log('dans le controller de la gateway'+JSON.stringify(this.usersService.findByUsername(username).pipe(take(1))));
     return this.usersService.findByUsername(username).pipe(take(1));
   }
+  @Get(':id')
+  findOneById(@Param('id') id: string):Observable<UserType>{
+    return this.usersService.findOneById(id);
+  }
   @Post()
   add(@Body() user: UserType) {
     return this.usersService.add(user);
-
+  }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateUser: UserType): Promise<Observable<UserType>> {
+      return this.usersService.update(id, updateUser);
   }
 }

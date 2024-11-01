@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import {  Inject,Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { UserType } from './model/user.type';
@@ -16,11 +16,20 @@ export class UsersService {
   }
   findByUsername(username: string): Observable<UserType> {
     const pattern: any = { cmd: 'findByUsername' };
-    Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, username)))
+   // Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, username)))
     return this._client.send<UserType>(pattern, username);
+  }
+  findOneById(id:string):Observable<UserType>{
+    const pattern : any = {cmd:'findById'};
+    Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, id)))
+    return this._client.send<UserType>(pattern,id);
   }
   add(data): Observable<UserType> {
     const pattern: any = { cmd: 'addUser' };
     return this._client.send<UserType>(pattern, data);
+  }
+  update(id:string,updateUser:UserType):Observable<UserType>{
+    const pattern: any = { cmd: 'updateUser' };
+    return this._client.send<UserType>(pattern, { id, updateUser });
   }
 }
