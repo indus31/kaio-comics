@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+<ion-content>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <input type="file" (change)="onFileChange($event)">
+  <button type="submit">Update Profile Picture</button>
+</form>
+    </ion-content>
+
