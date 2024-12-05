@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { take } from 'rxjs';
+import { FileUploadService } from 'src/app/core/file-upload.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
 
@@ -12,10 +14,12 @@ import { UsersService } from 'src/app/core/services/users/users.service';
 })
 export class UpdateProfilePictureComponent  implements OnInit {
   profileForm!: FormGroup;
+  selectedFile?: File ;
   
   constructor(private modalCtrl: ModalController, private fb: FormBuilder,
     private usersService: UsersService,
-    private storageService: StorageService) {}
+    private storageService: StorageService,
+  private fileUploadService :FileUploadService) {}
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -30,60 +34,32 @@ export class UpdateProfilePictureComponent  implements OnInit {
       profilePicture: ['']
     });
   }
-  onFileChange(event:Event) {
-    const target = event.target as HTMLInputElement;
-    if (target && target.files) {
-      const file = target.files[0];
-      if (file) {
-        this.profileForm.get('profilePicture')!.setValue(file);
-      }
-    }
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
-    const formData = new FormData();
-  formData.append('profilePicture', this.profileForm.get('profilePicture')!.value);
+    console.log('début du onSubmit')
+    if (this.selectedFile) {
+      console.log(this.selectedFile)
+      console.log(this.storageService.retrieve('session'));
+      const userId:string= this.storageService.retrieve('session');
+      const extension:string = this.selectedFile.name.split('.').pop() || '';
 
-  const userId = this.storageService.retrieve('session');
-  this.usersService.findOneBy(userId).subscribe(
-    response => {
-      console.log('Profile picture updated successfully', response);
-      // Save the image to the assets directory
-      const file = this.profileForm.get('profilePicture')!.value;
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        const imageUrl = event.target.result;
-        const fileName = `${userId}_front_picture.${file.type.split('/')[1]}`;
-        const filePath = `assets/users/users_front_picture/${fileName}`;
-        // Save the image to the assets directory
-        // You can use a service or a library to save the image to the file system
-        // For example, you can use the FileSaver library to save the image as a blob
-        //saveAs(imageUrl, fileName);
-        // Update the frontPicture field of the user object
-        this.usersService.findOneBy(userId).subscribe(
-          user => {
-            user.frontPicture = filePath;
-            this.usersService.updateUser(user).subscribe(
-              response => {
-                console.log('User updated successfully', response);
-              },
-              error => {
-                console.error('Error updating user', error);
-              }
-            );
+      this.fileUploadService.uploadFile(this.selectedFile, extension, userId)
+        .pipe(take(1))
+        .subscribe({
+          next: response => {
+            console.log('File uploaded successfully', response);
           },
-          error => {
-            console.error('Error retrieving user', error);
+          error: error => {
+            console.error('Error uploading file', error);
           }
-        );
-      };
-      reader.readAsDataURL(file);
-    },
-    error => {
-      console.error('Error updating profile picture', error);
+        });
     }
-  );
   }
+
+  
 
 }
 

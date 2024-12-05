@@ -10,9 +10,11 @@
     
   </ion-toolbar>
 <ion-content>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <input type="file" (change)="onFileChange($event)">
-  <button type="submit">Update Profile Picture</button>
-</form>
+  <div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <input type="file" (change)="onFileSelected($event)" formControlName="profilePicture" />
+      <button type="submit">Upload</button>
+    </form>
+  </div>
     </ion-content>
 
