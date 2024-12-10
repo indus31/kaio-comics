@@ -5,6 +5,7 @@
 /uploads
 /docker
 /env
+
 # Logs
 logs
 *.log
