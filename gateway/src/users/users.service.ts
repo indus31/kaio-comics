@@ -21,7 +21,7 @@ export class UsersService {
   }
   findOneById(id:string):Observable<UserType>{
     const pattern : any = {cmd:'findById'};
-    Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, id)))
+    //Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, id)))
     return this._client.send<UserType>(pattern,id);
   }
   add(data): Observable<UserType> {
