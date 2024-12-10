@@ -21,11 +21,13 @@ export class LoginService {
       map(user => {
         const dataJson = JSON.stringify(user)
         const id = JSON.stringify(user._id)
-        console.log(id)
-        console.log(dataJson)
-        this.storageService.store('session',[user._id,user.username])
-        console.log("recupération de l'id par le stockage : "+ this.storageService.retrieve('session'))
-        console.log('mot de passe retourner par la req  :'+user.password + 'password entré : '+credentials.password)
+        console.log('creating session for : '+credentials.login+' '+id)
+        //console.log(dataJson)
+        this.storageService.store('session',[user._id]);
+        this.storageService.store('userNameSession',[user.username]);
+        console.log('storing session informations')
+        // console.log("recupération de l'id par le stockage : "+ this.storageService.retrieve('session'))
+        // console.log('mot de passe retourner par la req  : '+user.password + ' password entré : '+credentials.password)
         if ( user.password === credentials.password) {
           return new HttpResponse<any>({
             status: 200,

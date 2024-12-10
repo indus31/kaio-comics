@@ -20,6 +20,7 @@ export class LogoutService {
   disconnect(){
     this._storage.remove('auth')
     this._router.navigate(['login'])
+    console.log('session disconnected')
     this.form.value === ''
   }
 }
