@@ -34,6 +34,12 @@ export class DatabaseService {
     }
     return deletePicture;
   }
-  
+  async updateByUserId(userId: string, update: string): Promise<ProfilePicture> {
+    return this.profilePictureModel.findOneAndUpdate(
+      { id_users: userId },
+      { path: update },
+      { new: true }
+    );
+  }
   
 }
