@@ -51,6 +51,7 @@ export class UpdateProfilePictureComponent  implements OnInit {
         .subscribe({
           next: response => {
             console.log('File uploaded successfully', response);
+            window.location.reload();
           },
           error: error => {
             console.error('Error uploading file', error);
