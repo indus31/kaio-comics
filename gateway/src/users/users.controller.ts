@@ -21,7 +21,7 @@ export class UsersController {
   }
   @Get(':id')
   findOneById(@Param('id') id: string):Observable<UserType>{
-    return this.usersService.findOneById(id);
+    return this.usersService.findOneById(id).pipe(take(1));
   }
   @Post()
   add(@Body() user: UserType) {
