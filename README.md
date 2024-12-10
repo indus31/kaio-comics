@@ -6,6 +6,7 @@ Version 1.0
         Publication de posts
         Abonnement à des utilisateurs
         Création de compte
+        gestion d'un compte utilisateur
 
 Version 2.0
 
