@@ -3,10 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProfilePictureModule } from './profile_picture/profile_picture.module';
+import { PostModule } from './post/post.module';
 
 
 @Module({
-  imports: [UsersModule, ProfilePictureModule],
+  imports: [UsersModule, ProfilePictureModule, PostModule],
   controllers: [AppController,],
   providers: [AppService],
 })
