@@ -1,35 +1,15 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Controller, Get } from '@nestjs/common';
 import { PostService } from './post.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { Observable, take } from 'rxjs';
+import { PostType } from './models/postType';
 
-@Controller()
+@Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @MessagePattern('createPost')
-  create(@Payload() createPostDto: CreatePostDto) {
-    return this.postService.create(createPostDto);
+  @Get()
+  findAll(): Observable<Array<PostType>> {
+    return this.postService.findAll().pipe(take(1));
   }
-
-  @MessagePattern('findAllPost')
-  findAll() {
-    return this.postService.findAll();
-  }
-
-  @MessagePattern('findOnePost')
-  findOne(@Payload() id: number) {
-    return this.postService.findOne(id);
-  }
-
-  @MessagePattern('updatePost')
-  update(@Payload() updatePostDto: UpdatePostDto) {
-    return this.postService.update(updatePostDto.id, updatePostDto);
-  }
-
-  @MessagePattern('removePost')
-  remove(@Payload() id: number) {
-    return this.postService.remove(id);
-  }
+  
 }
