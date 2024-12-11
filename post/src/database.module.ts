@@ -29,4 +29,4 @@ const envfile = 'env/' + process.env.EXEC_MODE;
   ],
   exports: [TypeOrmModule],
 })
-export class ConnectModule {}
+export class DatabaseModule {}
