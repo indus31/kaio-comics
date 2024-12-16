@@ -1,9 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PostType } from './models/postType';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, Payload } from '@nestjs/microservices';
+import { Post } from './entities/post.entity';
 
 @Injectable()
 export class PostService {
@@ -15,21 +16,35 @@ export class PostService {
     return this._client.send<Array<PostType>>(pattern, {});
   }
 
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  create(
+    post: PostType,
+  ): Observable<PostType> {
+    const pattern: any = { cmd: 'createPost' };
+    return this._client.send<PostType>(
+      pattern,
+      post,
+    );
   }
 
+  findOne(id: string): Observable<PostType> {
+    const pattern: any = { cmd: 'findOnePost' };
+    const payload: any = { id: id };
+    Logger.log(payload);
+    return this._client.send<PostType>(pattern, payload);
+  }
   
-
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  update(
+    id: string,
+    updatePostDto: UpdatePostDto,
+  ): Observable<UpdatePostDto> {
+    const pattern: any = { cmd: 'updatePost' };
+    const payload: any = { id: id, updatePost: updatePostDto };
+    Logger.log(payload)
+    return this._client.send<UpdatePostDto>(pattern, payload);
   }
-
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  
+  remove(id: string): Observable<UpdatePostDto> {
+    const pattern: any = { cmd: 'removePost' };
+    return this._client.send<UpdatePostDto>(pattern, id);
   }
 }
