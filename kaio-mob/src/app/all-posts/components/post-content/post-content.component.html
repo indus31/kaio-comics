@@ -1,0 +1,26 @@
+<ion-card-content class="postContainer">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11"
+        ><h1 class="blackColor">{{ postContent.title }}</h1>
+      </ion-col>
+      <ion-col>{{ postContent.category }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="divContainerChild">
+        <ion-img class="postImg" src="{{ postContent.media }}"></ion-img>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-item id="postContent">
+        {{ postContent.content }}
+      </ion-item>
+    </ion-row>
+    <ion-item class="marginTop">
+      <ion-note
+        >Publié le {{ postContent.postedAt | date : "dd/MM/yyyy" }} à
+        {{ postContent.postedAt | date : "shortTime" }}
+      </ion-note>
+    </ion-item>
+  </ion-grid>
+</ion-card-content>
