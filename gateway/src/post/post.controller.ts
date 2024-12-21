@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { PostService } from './post.service';
 import { Observable, take } from 'rxjs';
 import { PostType } from './models/postType';
@@ -32,5 +33,24 @@ export class PostController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.postService.remove(id);
+  }
+
+  @Get('scroll/:index')
+  findNext(@Param('index') index: number, @Res() res: Response): void {
+    this.postService
+      .findNext(index)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: Array<PostType> | null) => {
+          if (response) {
+            res.status(HttpStatus.OK).send(response);
+          } else {
+            res.status(404).send();
+          }
+        },
+        error: (error: any) => {
+          res.status(500).send(error);
+        },
+      });
   }
 }

@@ -1,10 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
+
 import { UpdatePostDto } from './dto/update-post.dto';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostType } from './models/postType';
 import { ClientProxy, Payload } from '@nestjs/microservices';
-import { Post } from './entities/post.entity';
+
 
 @Injectable()
 export class PostService {
@@ -46,5 +46,9 @@ export class PostService {
   remove(id: string): Observable<UpdatePostDto> {
     const pattern: any = { cmd: 'removePost' };
     return this._client.send<UpdatePostDto>(pattern, id);
+  }
+  findNext(index: number): Observable<Array<PostType>> {
+    const pattern: any = { cmd: 'nextPost' };
+    return this._client.send<Array<PostType>>(pattern, index);
   }
 }
