@@ -38,4 +38,9 @@ export class AppController {
   async deletePost(@Payload() id: string) {
     return this.appService.removePost(id);
   }
+
+  @MessagePattern({ cmd: 'nextPost' })
+  findNext(index: number): Promise<Array<PostType>> {
+    return this.appService.getNbPost(index);
+  }
 }

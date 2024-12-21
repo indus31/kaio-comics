@@ -10,7 +10,7 @@ export class AppController {
   async findAll(): Promise<Users[]> {
     return await this.appService.findAll();
   }
-  @MessagePattern({ cmd: 'oneUser' })
+  @MessagePattern({ cmd: 'findByLastname' })
   async findOne(@Payload() payload: any): Promise<Users> {
     return await this.appService.findOne(payload);
   }
@@ -24,7 +24,7 @@ export class AppController {
     const newUser = this.appService.add(user);
     return newUser;
   }
-  @MessagePattern({ cmd:'findById'})
+  @MessagePattern({ cmd:'oneUser'})
   async findOneById(@Payload() payload:any): Promise<Users>{
     return await this.appService.getUsers(payload)
   }

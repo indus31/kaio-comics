@@ -23,11 +23,11 @@ export class AppService {
     return userData;
   }
   async getUsers(id:any): Promise<Users>{
-    const existingIntern = await this.usersModel.findById(id).exec();
-    if (!existingIntern) {
+    const existingUser = await this.usersModel.findById(id).exec();
+    if (!existingUser) {
       throw new NotFoundException(`Intern #${id} not found`);
     }
-    return existingIntern;
+    return existingUser;
   }
   async add(createUser: Users): Promise<Users> {
     const newUser = await new this.usersModel(createUser);

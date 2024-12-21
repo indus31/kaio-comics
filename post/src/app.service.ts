@@ -10,6 +10,8 @@ import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class AppService {
   
+  nbPosts: number = 3;
+
   constructor(@InjectRepository(PostEntity)
   private _repository: Repository<PostEntity>,@Inject('USERS') private _client: ClientProxy){}
 
@@ -116,5 +118,37 @@ export class AppService {
     this._repository.delete({ id: id });
     
     return feedback;
+  }
+  getNbPost(index: number): Promise<any> {
+    return this._repository
+      .find({
+        order: { postedAt: 'DESC' },
+        take: this.nbPosts,
+        skip: this.nbPosts * index,
+      })
+      .then(async (posts) => {
+        const newPosts: Array<PostType> = [];
+        if (posts.length != 0) {
+          const pattern = { cmd: 'oneUser' };
+          for (const post of posts) {
+            const actualPost: PostType = {
+              id: post.id,
+              title: post.title,
+              content: post.content,
+              media: post.media,
+              postedAt: post.postedAt,
+              category: PostCategory[post.category],
+              author: await lastValueFrom(
+                this._client.send<UserType>(pattern, post.authorId),
+              ),
+            };
+            Logger.log(actualPost)
+            Logger.log(actualPost.author)
+            newPosts.push(actualPost);
+          }
+        }
+        return newPosts;
+      })
+      .catch((error) => Logger.log(error));
   }
 }
