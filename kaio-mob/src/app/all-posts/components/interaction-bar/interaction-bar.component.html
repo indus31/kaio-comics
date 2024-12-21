@@ -1,0 +1,16 @@
+<div class="divContainer border">
+  <div class="divContainerChild">
+    <img src="/assets/icon/like_icon.png" alt="" />
+    <img
+      src="/assets/icon/com_icon.png"
+      alt="comments"
+      (click)="toggleCommentForm()"
+    />
+  </div>
+</div>
+<div *ngIf="showCommentForm" class="blackBorder formContainer">
+  <form class="comment-form">
+    <textarea class="textarealayOut" placeholder="écrivez un commentaire..."></textarea>
+    <ion-button type="submit">Submit</ion-button>
+  </form>
+</div>
