@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { map, Subscription, take } from 'rxjs';
 
 import { FileUploadService } from 'src/app/core/file-upload.service';
@@ -11,15 +11,18 @@ import { UsersService } from 'src/app/core/services/users/users.service';
   templateUrl: './user-name-profile.component.html',
   styleUrls: ['./user-name-profile.component.scss'],
 })
-export class UserNameProfileComponent  implements OnInit, OnDestroy {
+export class UserNameProfileComponent  implements OnInit, OnDestroy ,OnChanges{
   
   @Input() user?: UserType
   private _subscription!: Subscription
+  @Input()
+  public userName : string = this.storageService.retrieve('userNameSession');
 
   constructor(private storageService: StorageService,private _userService:UsersService) { }
-
+ 
   ngOnInit(): void {
     console.log('Component initialized');
+    console.log('session of '+this.userName)
     const id = this.storageService.retrieve('session')
     this._subscription = this._userService.findOneBy(id).subscribe({
       next:(user: UserType)=>{
@@ -32,7 +35,8 @@ export class UserNameProfileComponent  implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['user']) {
+    if (changes['userName']) {
+      console.log('user input property changed:', changes['user'].currentValue);
       console.log('restart component')
       this.ngOnInit();
     }
