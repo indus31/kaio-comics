@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Créer un Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Titre</ion-label>
+      <ion-input formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contenu</ion-label>
+      <ion-textarea formControlName="content"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Média (Image)</ion-label>
+      <ion-input type="file" formControlName="media"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Auteur (ID)</ion-label>
+      <ion-input formControlName="author"></ion-input>
+    </ion-item>
+
+    
+
+    <ion-button type="submit" expand="full" [disabled]="!postForm.valid">Créer le Post</ion-button>
+  </form>
+</ion-content>
