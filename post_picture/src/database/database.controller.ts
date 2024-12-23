@@ -9,7 +9,7 @@ export class DatabaseController {
   
   constructor(private databaseService:DatabaseService){}
 
-  @MessagePattern({ cmd: 'createPicture' })
+  @MessagePattern({ cmd: 'createPostPicture' })
   async createPicture(@Payload() payload :{postId:string,path:string}){
     Logger.log("starting process to create document post_picture")
     
@@ -17,7 +17,7 @@ export class DatabaseController {
    Logger.log(newPic)
     return {message : 'create successfully'}
   }
-  @MessagePattern({ cmd: 'upload' })
+  @MessagePattern({ cmd: 'uploadPostPicture' })
   async uploadFile(@Payload() payload: { file: string, extension: string, postId: string }) {
     // Convertir le fichier en buffer
     const fileBuffer = Buffer.from(payload.file, 'base64');
@@ -59,12 +59,12 @@ export class DatabaseController {
     Logger.log('file found')
     return { file: fileBuffer.toString('base64'), extension: filePath.split('.').pop() };
   }
-  @MessagePattern({cmd:'allPictures'})
+  @MessagePattern({cmd:'allPostsPictures'})
   async findAll(){
     const pictureData = await this.databaseService.findAll();
     return pictureData;
   }
-  @MessagePattern({cmd:'removePicture'})
+  @MessagePattern({cmd:'removePostPicture'})
   async removePicture(id:string){
     return this.databaseService.deletePicture(id);
   }
