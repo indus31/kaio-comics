@@ -39,15 +39,15 @@ export class PostPictureService {
     return Buffer.from(postPicture.file, 'base64');
   }
   findAll():Observable<PostPictureType[]>{
-    const pattern:any = {cmd:'allPictures'};
+    const pattern:any = {cmd:'allPostsPictures'};
     return this.client.send<PostPictureType[]>(pattern,{});
    }
    removeOne(id:string): Observable<PostPictureType>{
-    const pattern:any = {cmd:'removePicture'};
+    const pattern:any = {cmd:'removePostPicture'};
     return this.client.send<PostPictureType>(pattern,id)
    }
    createPicture(postId:string):Observable<PostPictureType>{
-    const pattern:any = {cmd:'createPicture'};
+    const pattern:any = {cmd:'createPostPicture'};
     return this.client.send<PostPictureType>(pattern,postId)
    }
 
