@@ -13,7 +13,7 @@ fi
 if [  $# -eq 0 ]
 then
     # if no arguments, run all the pieces of the backend
-    ALL_BACKEND_PARTS="users post profile_picture gateway"
+    ALL_BACKEND_PARTS="users post profile_picture gateway post_picture"
     # Stop all pieces of the backend (and any other running Node.js program, if any)
     echo "STEP 1: Stopping all running Node.js programs, if any"
     killall -q node
@@ -38,7 +38,7 @@ do
     fi
 done
 
-# Start all the pieces of the backend (i.e. the gateway and the follwing micro-services: users, profile_picture,post)
+# Start all the pieces of the backend (i.e. the gateway and the follwing micro-services: users, profile_picture,post,post_picture)
 echo "STEP 3: Starting in different terminal tabs, all the follwing pieces of the backend: $ALL_BACKEND_PARTS"
 for BACKEND_PART in $ALL_BACKEND_PARTS
 do
