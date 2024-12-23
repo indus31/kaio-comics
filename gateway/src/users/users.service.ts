@@ -11,7 +11,7 @@ export class UsersService {
     return this._client.send<UserType[]>(pattern, {});
   }
   findOne(lastname: string): Observable<UserType> {
-    const pattern: any = { cmd: 'oneUser' };
+    const pattern: any = { cmd: 'findByLastname' };
     return this._client.send<UserType>(pattern, lastname);
   }
   findByUsername(username: string): Observable<UserType> {
@@ -20,7 +20,7 @@ export class UsersService {
     return this._client.send<UserType>(pattern, username);
   }
   findOneById(id:string):Observable<UserType>{
-    const pattern : any = {cmd:'findById'};
+    const pattern : any = {cmd:'oneUser'};
     //Logger.log('dans le service de la gateway :'+JSON.stringify(this._client.send<UserType>(pattern, id)))
     return this._client.send<UserType>(pattern,id);
   }
