@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -12,6 +12,7 @@ import { PostComponent } from './components/post/post.component';
 import { InteractionBarComponent } from './components/interaction-bar/interaction-bar.component';
 import { PostContentComponent } from './components/post-content/post-content.component';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 
 @NgModule({
   imports: [
@@ -19,8 +20,9 @@ import { PostListComponent } from './components/post-list/post-list.component';
     FormsModule,
     IonicModule,
     SharedModule,
-    AllPostsPageRoutingModule
+    AllPostsPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [AllPostsPage,PostComponent,InteractionBarComponent,PostContentComponent,PostListComponent]
+  declarations: [AllPostsPage,PostComponent,InteractionBarComponent,PostContentComponent,PostListComponent,AddPostComponent]
 })
 export class AllPostsPageModule {}
