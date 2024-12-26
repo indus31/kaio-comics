@@ -37,7 +37,6 @@ export class AddPostComponent  implements OnInit {
       title: ['', Validators.required],
       content: ['', Validators.required],
       media: [''],
-      author: [{} as UserType, Validators.required],
     });
   }
   
