@@ -19,6 +19,7 @@ export class PostService {
   create(
     post: PostType,
   ): Observable<PostType> {
+    Logger.log(post)
     const pattern: any = { cmd: 'createPost' };
     return this._client.send<PostType>(
       pattern,
@@ -29,6 +30,13 @@ export class PostService {
   findOne(id: string): Observable<PostType> {
     const pattern: any = { cmd: 'findOnePost' };
     const payload: any = { id: id };
+    Logger.log(payload);
+    return this._client.send<PostType>(pattern, payload);
+  }
+
+ findLatestByAuthorId(authorId: string): Observable<PostType> {
+    const pattern: any = { cmd: 'findLatestPostByAuthorId' };
+    const payload: any = { authorId: authorId };
     Logger.log(payload);
     return this._client.send<PostType>(pattern, payload);
   }

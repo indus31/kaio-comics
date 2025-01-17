@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Logger, Param, Post, Put, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { PostService } from './post.service';
 import { Observable, take } from 'rxjs';
@@ -11,11 +11,16 @@ export class PostController {
 
   @Post()
   create(@Body() post: PostType) {
+    Logger.log("coucou from postService Create");
     return this.postService.create(post);
   }
   @Get(':id')
   findOne(@Param('id') id: string): Observable<PostType> {
     return this.postService.findOne(id);
+  }
+  @Get('author/:authorId')
+  findLatestByAuthorId(@Param('authorId') authorId: string): Observable<PostType> {
+    return this.postService.findLatestByAuthorId(authorId);
   }
 
   @Get()
