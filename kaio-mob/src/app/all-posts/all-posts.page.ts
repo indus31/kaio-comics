@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LogoutService } from '../core/services/log-out.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-all-posts',
@@ -9,6 +10,7 @@ import { AddPostComponent } from './components/add-post/add-post.component';
   styleUrls: ['./all-posts.page.scss'],
 })
 export class AllPostsPage {
+  
   constructor(private _modalCtrl: ModalController, private _modalController: ModalController) { }
   ngOnInit() {}
   async dismiss() {
