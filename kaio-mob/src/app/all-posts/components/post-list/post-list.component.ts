@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { Observable, take } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { PostType } from 'src/app/core/model/post/postType';
 import { PostService } from 'src/app/core/services/post/post.service';
 
@@ -10,20 +10,30 @@ import { PostService } from 'src/app/core/services/post/post.service';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit ,OnDestroy{
   public posts!: Array<PostType>;
-
+  private _subscription!: Subscription
   constructor(private _postService: PostService) {}
+  
+  ngOnDestroy(): void {
+    // Nettoyez les ressources si nécessaire
+    console.log('Component destroyed');
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
+  }
 
   ngOnInit() {
-    this._postService
+    this._subscription = this._postService
       .findNext()
       .pipe(take(1))
       .subscribe({
         next: (response: any) => {
           this.posts = response;
-          console.log(this.posts)
+          //console.log(this.posts)
         },
+        error:(error:any)=>{},
+        complete:()=>{console.log(this.posts)}
       });
       //console.log(this.posts)
     //this.posts = this._postService.findNext(3)

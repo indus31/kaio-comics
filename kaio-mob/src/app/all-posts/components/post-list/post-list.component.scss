@@ -1,0 +1,18 @@
+.postList{
+    width:100%;
+    border:black 1px solid;
+    display:flex;
+    flex-direction: column;
+    background-color:#9BCAF2;
+    align-items: center;
+    border-radius: 10px;
+}
+.primaryBg{
+    --background:#9BCAF2;
+}
+.secondaryBg{
+    --background:#0388A6;
+}
+.list-md{
+    background: #9BCAF2;
+}

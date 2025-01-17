@@ -9,8 +9,22 @@ import { PostType } from 'src/app/core/model/post/postType';
 export class PostContentComponent  implements OnInit {
   @Input()
   postContent!: PostType
+  isExpanded = false;
   constructor() { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    console.log(this.postContent.media)
+  }
+  truncateText(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
+  toggleExpand() {
+    this.isExpanded = !this.isExpanded;
+  }
+  isTextTooLong(text: string, maxLength: number): boolean {
+    return text.length > maxLength;
+  }
 }

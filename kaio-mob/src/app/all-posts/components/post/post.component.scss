@@ -1,0 +1,22 @@
+.divContainerChild  {
+        width:100%;
+        //border:solid #0388A6 2px;
+        border-radius: 10px;
+        //margin-left:60%;
+        background-color:#9BCAF2;
+        margin-bottom: 5%;
+    }
+.primaryColorBg{
+    background-color: #9BCAF2;
+}
+
+@media (min-width: 1000px) and (max-width:1420px ) {
+    .divContainerChild{
+        width:800px;
+    }
+}
+@media (min-width: 1425px) and (max-width: 2000px) {
+    .divContainerChild{
+        width:1600px;
+    }
+}
