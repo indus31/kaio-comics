@@ -25,7 +25,7 @@ export class PostPictureService {
     Logger.log('File extension:', extension);
     Logger.log('Post ID:', postId);
 
-    return lastValueFrom(this.client.send({ cmd: 'upload' }, { file: fileBuffer.toString('base64'), extension, postId }));
+    return lastValueFrom(this.client.send({ cmd: 'uploadPostPicture' }, { file: fileBuffer.toString('base64'), extension, postId }));
   }
   async getPostPictureBufferByPostId(postId: string): Promise<Buffer> {
     Logger.log('sending message to post_picture');
