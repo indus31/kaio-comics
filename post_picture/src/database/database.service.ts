@@ -25,8 +25,9 @@ export class DatabaseService {
     return allPictures;
   }
   async getPostPictureByPostId(post_id: string): Promise<PostPicture> {
-    return this.postPictureModel.findOne({ id_users:post_id }).exec();
+    return this.postPictureModel.findOne({ id_post:post_id }).exec();
   }
+ 
   async deletePicture(id:string):Promise<PostPicture>{
     const deletePicture = await this.postPictureModel.findByIdAndDelete(id);
     if(!deletePicture){

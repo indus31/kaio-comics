@@ -19,6 +19,12 @@ export class AppController {
     Logger.log(id);
     return this.appService.findOne(id);
   }
+  @MessagePattern({ cmd: 'findLatestPostByAuthorId' })
+async findOneByAuthorId(@Payload() payload: { authorId: string }): Promise<PostType> {
+  const authorId: string = payload.authorId;
+  Logger.log(authorId);
+  return this.appService.findLatestByAuthorId(authorId);
+}
 
   @MessagePattern({ cmd: 'allPost' })
   findAll(): Promise<Array<PostType>> {

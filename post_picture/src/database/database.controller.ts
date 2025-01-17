@@ -25,27 +25,28 @@ export class DatabaseController {
     const randomFileName = Math.floor(100000 + Math.random() * 900000).toString();
 
     const filePath = join(process.cwd(), 'post_media', `${randomFileName}.${payload.extension}`);
-    await this.deleteOldImage(payload.postId);
+    //await this.deleteOldImage(payload.postId);
     writeFileSync(filePath, fileBuffer);
     Logger.log('File uploaded successfully');
    
     Logger.log(`User ID: ${payload.postId}`);
     Logger.log(`filepath : ${filePath}`)
-    await this.databaseService.updateByPostId(payload.postId, filePath);
+    Logger.log('juste before create a new post picture in db')
+    await this.databaseService.create( filePath,payload.postId);
 
-    return { message: 'File uploaded successfully', path: filePath, userId: payload.postId };
+    return { message: 'File uploaded successfully', path: filePath, postId: payload.postId };
   }
   
 
   @MessagePattern({ cmd: 'getPostPicture' })
-  async getProfilePictureByUserId(@Payload() payload: { postId: string }) {
+  async getPostPictureByPostId(@Payload() payload: { postId: string }) {
     Logger.log('receiving from the gateway');
     const postPicture = await this.databaseService.getPostPictureByPostId(payload.postId);
     Logger.log('id : ', payload.postId)
     Logger.log(postPicture);
     if (!postPicture) {
       Logger.log('id : ', payload.postId);
-      throw new Error('Profile picture not found');
+      throw new Error('Post picture not found');
     }
     const filePath = postPicture.path;
     if(!filePath){
@@ -59,6 +60,7 @@ export class DatabaseController {
     Logger.log('file found')
     return { file: fileBuffer.toString('base64'), extension: filePath.split('.').pop() };
   }
+  
   @MessagePattern({cmd:'allPostsPictures'})
   async findAll(){
     const pictureData = await this.databaseService.findAll();
@@ -69,8 +71,8 @@ export class DatabaseController {
     return this.databaseService.deletePicture(id);
   }
 
-  async deleteOldImage(userId: string) {
-    const oldImage = await this.databaseService.getPostPictureByPostId(userId);
+  async deleteOldImage(postId: string) {
+    const oldImage = await this.databaseService.getPostPictureByPostId(postId);
     if (oldImage && oldImage.path) {
       // Test si oldImage.path est égal à 'asset/avatar.png'
       if (oldImage.path == 'asset/avatar.png') {
