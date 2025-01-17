@@ -18,8 +18,16 @@
 
     <ion-item>
       <ion-label position="floating">Média (Image)</ion-label>
-      <ion-input type="file" formControlName="media"></ion-input>
+      <ion-input type="file" (change)="onFileSelected($event)" formControlName="media"></ion-input>
     </ion-item>
     <ion-button type="submit" expand="full" [disabled]="!postForm.valid">Créer le Post</ion-button>
   </form>
+  <!-- Prévisualisation du post -->
+  <div *ngIf="previewPost" class="divContainerChild">
+    <ion-card>
+      <app-user-header [user]="previewPost.author"></app-user-header>
+      <app-post-content [postContent]="previewPost"></app-post-content>
+      <app-interaction-bar></app-interaction-bar>
+    </ion-card>
+  </div>
 </ion-content>
