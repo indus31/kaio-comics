@@ -1,16 +1,7 @@
 <div class="divContainer border">
   <div class="divContainerChild">
-    <img src="/assets/icon/like_icon.png" alt="" />
-    <img
-      src="/assets/icon/com_icon.png"
-      alt="comments"
-      (click)="toggleCommentForm()"
-    />
+    <ion-icon size="large" name="heart-outline"></ion-icon>
+    <ion-icon size="large" name="ellipsis-horizontal-circle-outline"></ion-icon>
   </div>
 </div>
-<div *ngIf="showCommentForm" class="blackBorder formContainer">
-  <form class="comment-form">
-    <textarea class="textarealayOut" placeholder="écrivez un commentaire..."></textarea>
-    <ion-button type="submit">Submit</ion-button>
-  </form>
-</div>
+
