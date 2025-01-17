@@ -26,7 +26,18 @@ export class PostService {
   findAll(): Observable<Array<PostType>> {
     return this._httpClient.get<Array<PostType>>(this.URI)
   }
-  //   .pipe(
+  findLatest(id:string):Observable<PostType>{
+    return this._httpClient.get<PostType>(this.URI+`/author/`+ id)
+  }
+  createPost(post: PostType): Observable<PostType> {
+    return this._httpClient.post<PostType>(this.URI, post);
+  }
+  updatePost(post:PostType,id:string):Observable<PostType>{
+    return this._httpClient.put<PostType>(this.URI+'/'+id,post)
+  }
+  
+}
+//   .pipe(
   //     map((posts: Array<any>) => { // Transform an observable to another observable
   //       return posts.map((post: any) => {
   //         return { // Deserialization
@@ -57,4 +68,3 @@ export class PostService {
   //     })
   //   )
   // }
-}
