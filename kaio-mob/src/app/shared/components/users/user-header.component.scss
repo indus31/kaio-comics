@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'animeAce';
+    src: url('/assets/FONTS/anime_ace_bb/animeace2bb_tt/animeace2_reg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.secondaryColorBg{
+    background-color: #0388A6;
+    --background: #0388A6;
+}
+.whiteBg{
+    background-color:white;
+}
+.primaryColorBg{
+    background-color: #9BCAF2;
+    --background: #9BCAF2;
+}
+ion-button{
+    --background: #9BCAF2;
+}
+.userName{
+    font-family: 'animeAce';
+}
 img{
     object-fit: cover;
     width:100%;
@@ -20,4 +43,11 @@ ion-thumbnail {
 #cadrePhoto{
     border-radius: 100%;
     border:black 1px solid;
+}
+
+
+@media (min-width: 925px) and (max-width: 2000px) {
+    .userName{
+        font-size:30px;
+    }
 }

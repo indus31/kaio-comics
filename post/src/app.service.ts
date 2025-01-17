@@ -60,6 +60,37 @@ export class AppService {
       throw new Error(`Failed to retrieve post: ${error.message}`);
     }
   }
+  async findLatestByAuthorId(authorId: string): Promise<PostType> {
+    try {
+      const post = await this._repository.findOne({
+        where: { authorId },
+        order: { postedAt: 'DESC' }, // Trier par date décroissante
+      });
+      if (!post) {
+        throw new NotFoundException(`No recent post found for author ID ${authorId}`);
+      }
+
+      const pattern = { cmd: 'oneUser' };
+      const author = await lastValueFrom(this._client.send<UserType>(pattern, post.authorId));
+
+      const actualPost: PostType = {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        media: post.media,
+        postedAt: post.postedAt,
+        category: PostCategory[post.category],
+        likes: post.likes,
+        comments: post.comments,
+        author: author,
+      };
+
+      return actualPost;
+    } catch (error) {
+      Logger.log(error);
+      throw new Error(`Failed to retrieve post: ${error.message}`);
+    }
+  }
   getAllPosts(): Promise<any> {
     
     return this._repository
